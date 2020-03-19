@@ -13,25 +13,23 @@ const connection = mysql.createConnection({
     database: 'trips',
 });
 
-connection.connect((err) => {
-    if (err) {
-        /*console.log('Error connecting to database');
-        return;*/
-        throw err;
+connection.connect((error) => {
+    if (error) {
+        throw error;
     }
     console.log('Connected with MySql database');
 });
 
 // index.html load
-fs.readFile('./index.html', function (err, html) {
-    if (err) {
-        throw err;
+fs.readFile('./index.html', function (error, html) {
+    if (error) {
+        throw error;
     }
 
-    const server = http.createServer(function(req, res) {
-        res.writeHeader(200, {"Content-Type": "text/html"});
-        res.write(html);
-        res.end();
+    const server = http.createServer(function(request, response) {
+        response.writeHeader(200, {"Content-Type": "text/html"});
+        response.write(html);
+        response.end();
     });
 
     server.listen(port, hostname, () => {
